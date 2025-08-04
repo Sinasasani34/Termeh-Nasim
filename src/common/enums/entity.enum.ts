@@ -3,11 +3,11 @@ export enum EntityNames {
     Profile = "profile",
     Otp = "otp",
     Category = "category",
-    Blog = "blog",
-    BlogCategory = "blog_category",
-    BlogLikes = "blog_likes",
-    BlogComments = "blog_comments",
-    BlogBookemark = "blog_bookmarks",
+    Course = "course",
+    CourseCategory = "course_category",
+    CourseLikes = "course_likes",
+    CourseComments = "course_comments",
+    CourseBookemark = "course_bookmarks",
     Image = "image",
     Follow = 'follow'
 }
