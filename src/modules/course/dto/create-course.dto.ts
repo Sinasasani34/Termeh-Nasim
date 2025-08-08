@@ -34,7 +34,7 @@ export class CreateCourseDto {
     categoryId: number;
 }
 
-export class UpdateBlogDto extends PartialType(CreateCourseDto) { }
+export class UpdateCourseDto extends PartialType(CreateCourseDto) { }
 
 export class FilterCourseDto {
     category: string;

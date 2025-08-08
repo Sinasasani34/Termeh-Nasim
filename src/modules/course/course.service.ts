@@ -1,6 +1,5 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
-import { CreateCourseDto, FilterCourseDto } from './dto/create-course.dto';
-import { UpdateCourseDto } from './dto/update-course.dto';
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
+import { CreateCourseDto, FilterCourseDto, UpdateCourseDto } from './dto/create-course.dto';
 import { PublicMessage } from 'src/common/enums/message';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CourseEntity } from './entities/course.entity';
@@ -9,7 +8,6 @@ import { NotFoundMessage } from 'src/common/enums/message.enum';
 import { CategoryEntity } from '../category/entities/category.entity';
 import { PaginationDto } from 'src/common/dtos/pagination.dto';
 import { paginationGenerator, paginationSolver } from 'src/common/utils/pagination.util';
-import { EntityNames } from 'src/common/enums/entity.enum';
 
 @Injectable()
 export class CourseService {
@@ -106,15 +104,50 @@ export class CourseService {
     };
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} course`;
+  async findOneById(id: number) {
+    const course = await this.courseRepository.findOneBy({ id });
+    if (!course) {
+      throw new NotFoundException(NotFoundMessage.NotFoundCourse);
+    }
+    return course;
   }
 
-  update(id: number, updateCourseDto: UpdateCourseDto) {
-    return `This action updates a #${id} course`;
+  async update(id: number, updateCourseDto: UpdateCourseDto) {
+    const course = await this.courseRepository.findOne({ where: { id } });
+    if (!course) {
+      throw new NotFoundException('دوره مورد نظر پیدا نشد');
+    }
+
+    if (updateCourseDto.categoryId && updateCourseDto.categoryId !== course.category?.id) {
+      const category = await this.categoryRepository.findOne({ where: { id: updateCourseDto.categoryId } });
+      if (!category) {
+        throw new BadRequestException('دسته‌بندی وارد شده معتبر نیست');
+      }
+      course.category = category;
+    }
+
+    if (updateCourseDto.title !== undefined) course.title = updateCourseDto.title;
+    if (updateCourseDto.description !== undefined) course.description = updateCourseDto.description;
+    if (updateCourseDto.image !== undefined) course.image = updateCourseDto.image;
+    if (updateCourseDto.syllabus !== undefined) course.syllabus = updateCourseDto.syllabus;
+    if (updateCourseDto.requirements !== undefined) course.requirements = updateCourseDto.requirements;
+    if (updateCourseDto.price !== undefined) course.price = updateCourseDto.price;
+    if (updateCourseDto.isActive !== undefined) course.isActive = updateCourseDto.isActive;
+
+    await this.courseRepository.save(course);
+    return {
+      message: PublicMessage.Updated
+    }
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} course`;
+  async remove(id: number) {
+    const course = await this.courseRepository.findOneBy({ id });
+    if (!course) {
+      throw new NotFoundException(NotFoundMessage.NotFoundCourse);
+    }
+    await this.courseRepository.delete({ id });
+    return {
+      message: PublicMessage.Deleted
+    }
   }
 }

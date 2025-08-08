@@ -37,4 +37,6 @@ export enum NotFoundMessage {
     NotFoundCategory = "دسته بندی یافت نشد",
     NotFoundPost = "مقاله ای یافت نشد",
     NotFoundUser = "کاربر مورد نظر یافت نشد",
+    NotFoundCourse = "دوره يافت نشد",
+    NotFoundPayment = "پرداختي يافت نشد",
 }

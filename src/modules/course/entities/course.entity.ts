@@ -1,7 +1,8 @@
 import { BaseEntity } from "src/common/abstracts/base.entity";
 import { EntityNames } from "src/common/enums/entity.enum";
 import { CategoryEntity } from "src/modules/category/entities/category.entity";
-import { Column, Entity, JoinColumn, ManyToOne } from "typeorm";
+import { EnrollmentEntity } from "src/modules/enrollment/entities/enrollment.entity";
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany } from "typeorm";
 
 @Entity(EntityNames.Course)
 export class CourseEntity extends BaseEntity {
@@ -32,4 +33,7 @@ export class CourseEntity extends BaseEntity {
     @ManyToOne(() => CategoryEntity, category => category.courses)
     @JoinColumn({ name: 'categoryId' })
     category: CategoryEntity;
+
+    @OneToMany(() => EnrollmentEntity, (enrollment) => enrollment.course)
+    enrollments: EnrollmentEntity[];
 }
