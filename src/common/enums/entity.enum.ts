@@ -11,6 +11,6 @@ export enum EntityNames {
     CourseBookemark = "course_bookmarks",
     Image = "image",
     Follow = 'follow',
-    Enrollments = 'enrollments',
+    Registration = 'registration',
     Payments = 'payments',
 }

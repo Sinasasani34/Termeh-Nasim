@@ -8,7 +8,8 @@ import { AuthModule } from '../auth/auth.module';
 import { CategoryModule } from '../category/category.module';
 import { CourseModule } from '../course/course.module';
 import { ImageModule } from '../image/image.module';
-import { EnrollmentModule } from '../enrollment/enrollment.module';
+import { RegistrationModule } from '../registration/registration.module';
+import { PaymentModule } from '../payment/payment.module';
 
 @Module({
   imports: [
@@ -22,7 +23,8 @@ import { EnrollmentModule } from '../enrollment/enrollment.module';
     CategoryModule,
     CourseModule,
     ImageModule,
-    EnrollmentModule
+    RegistrationModule,
+    PaymentModule
   ],
   controllers: [],
   providers: [],

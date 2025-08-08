@@ -11,7 +11,7 @@ import { ImageEntity } from "src/modules/image/entities/image.entity";
 import { FollowEntity } from "./follow.entity";
 import { UserStatus } from "../enum/status.enum";
 import { Roles } from "src/common/enums/role.enum";
-import { EnrollmentEntity } from "src/modules/enrollment/entities/enrollment.entity";
+import { RegistrationEntity } from "src/modules/registration/entities/registration.entity";
 @Entity(EntityNames.User)
 export class UserEntity extends BaseEntity {
     @Column({ unique: true, nullable: true })
@@ -86,8 +86,8 @@ export class UserEntity extends BaseEntity {
     @OneToMany(() => FollowEntity, follow => follow.follower)
     following: FollowEntity[];
 
-    @OneToMany(() => EnrollmentEntity, (enrollment) => enrollment.user)
-    enrollments: EnrollmentEntity[];
+    @OneToMany(() => RegistrationEntity, (registration) => registration.user)
+    registrations: RegistrationEntity[];
 
     @CreateDateColumn()
     created_at: Date
