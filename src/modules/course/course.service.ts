@@ -43,36 +43,6 @@ export class CourseService {
     return category;
   }
 
-  // async courseList(paginationDto: PaginationDto, filterDto: FilterCourseDto) {
-  //   const { limit, page, skip } = paginationSolver(paginationDto);
-  //   let { category, search } = filterDto;
-  //   let where = '';
-  //   if (category) {
-  //     category = category.toLowerCase();
-  //     if (where.length > 0) where += ' AND ';
-  //     where += `category.title = LOWER(:category)`;
-  //   }
-  //   if (search) {
-  //     if (where.length > 0) where += ' AND ';
-  //     search = `%${search}%`;
-  //     where += `CONCAT(course.title, course.description) ILIKE :search`
-  //   }
-
-  //   const [courses, count] = await this.courseRepository.createQueryBuilder(EntityNames.Course)
-  //     .leftJoin("course.category", "category")
-  //     // .leftJoin("categories.category", "category")
-  //     .addSelect(['category.title', 'course.price', 'course.title'])
-  //     .where(where, { category, search })
-  //     .orderBy("course.id", 'DESC')
-  //     .skip(skip)
-  //     .take(limit)
-  //     .getManyAndCount();
-  //   return {
-  //     pagination: paginationGenerator(count, page, limit),
-  //     courses
-  //   }
-  // }
-
   async courseList(paginationDto: PaginationDto, filterDto: FilterCourseDto) {
     const { limit, page, skip } = paginationSolver(paginationDto);
     const { category, search } = filterDto;
