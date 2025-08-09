@@ -1,7 +1,6 @@
 export enum EntityNames {
     User = "user",
     Profile = "profile",
-    Cart = "cart_items",
     Otp = "otp",
     Category = "category",
     Course = "course",
@@ -11,6 +10,5 @@ export enum EntityNames {
     CourseBookemark = "course_bookmarks",
     Image = "image",
     Follow = 'follow',
-    Registration = 'registration',
-    Payments = 'payments',
+    CourseCustomField = 'course_custom_field',
 }

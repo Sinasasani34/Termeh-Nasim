@@ -1,34 +1,39 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe } from '@nestjs/common';
 import { CourseCustomFieldsService } from './course-custom-fields.service';
 import { CreateCourseCustomFieldDto } from './dto/create-course-custom-field.dto';
 import { UpdateCourseCustomFieldDto } from './dto/update-course-custom-field.dto';
+import { AuthDecorator } from 'src/common/decorators/Auth.decorator';
+import { CanAccess } from 'src/common/decorators/role.decorator';
+import { Roles } from 'src/common/enums/role.enum';
+import { SaveEnrollmentDataDto } from './dto/save-enrollment-data.dto';
+import { ApiConsumes } from '@nestjs/swagger';
+import { SwaggerConsumes } from 'src/common/enums/swagger.consumes.enum';
 
-@Controller('course-custom-fields')
+@Controller('courses/:courseId/custom-fields')
+@AuthDecorator()
 export class CourseCustomFieldsController {
-  constructor(private readonly courseCustomFieldsService: CourseCustomFieldsService) {}
+  constructor(private readonly customFieldsService: CourseCustomFieldsService) { }
 
+  @CanAccess(Roles.Admin)
   @Post()
-  create(@Body() createCourseCustomFieldDto: CreateCourseCustomFieldDto) {
-    return this.courseCustomFieldsService.create(createCourseCustomFieldDto);
+  async createCustomField(
+    @Param('courseId', ParseIntPipe) courseId: number,
+    @Body() createCustomFieldDto: CreateCourseCustomFieldDto
+  ) {
+    createCustomFieldDto.courseId = courseId;
+    return this.customFieldsService.createCustomField(createCustomFieldDto);
   }
 
   @Get()
-  findAll() {
-    return this.courseCustomFieldsService.findAll();
+  async getCustomFields(@Param('courseId', ParseIntPipe) courseId: number) {
+    return this.customFieldsService.getFieldsForCourse(courseId);
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.courseCustomFieldsService.findOne(+id);
-  }
-
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateCourseCustomFieldDto: UpdateCourseCustomFieldDto) {
-    return this.courseCustomFieldsService.update(+id, updateCourseCustomFieldDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.courseCustomFieldsService.remove(+id);
+  @Post('enrollment-data')
+  @ApiConsumes(SwaggerConsumes.UrlEncoded, SwaggerConsumes.Json)
+  async saveEnrollmentData(
+    @Body() saveEnrollmentDataDto: SaveEnrollmentDataDto
+  ) {
+    return this.customFieldsService.saveUserEnrollmentData(saveEnrollmentDataDto);
   }
 }
