@@ -58,6 +58,10 @@ export class CategoryService {
     return category;
   }
 
+  async findOneByTitle(title: string) {
+    return await this.categoryRepository.findOneBy({ title });
+  }
+
   async update(id: number, updateCategoryDto: UpdateCategoryDto) {
     const category = await this.findOne(id);
     const { priority, title } = updateCategoryDto;

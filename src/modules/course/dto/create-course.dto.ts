@@ -1,40 +1,56 @@
-import { ApiProperty, ApiPropertyOptional, PartialType } from "@nestjs/swagger";
-import { IsNotEmpty, Length } from "class-validator";
+import { ApiProperty, ApiPropertyOptional } from "@nestjs/swagger";
+import { IsNotEmpty } from "class-validator";
 
 export class CreateCourseDto {
     @ApiProperty()
     @IsNotEmpty()
-    @Length(10, 100)
     title: string;
 
     @ApiProperty()
-    @Length(10, 300)
-    description?: string;
-
-    @ApiPropertyOptional()
-    image?: string;
+    @IsNotEmpty()
+    slug: string;
 
     @ApiProperty()
-    @Length(10, 100)
-    syllabus?: string;
+    @IsNotEmpty()
+    description: string;
 
     @ApiProperty()
-    @Length(10, 100)
-    requirements?: string;
+    @IsNotEmpty()
+    categories: string[] | string;
 
     @ApiProperty()
     @IsNotEmpty()
     price: number;
 
     @ApiProperty()
-    isActive?: boolean;
+    @IsNotEmpty()
+    duration: string;
 
     @ApiProperty()
     @IsNotEmpty()
-    categoryId: number;
-}
+    level: string;
 
-export class UpdateCourseDto extends PartialType(CreateCourseDto) { }
+    @ApiProperty()
+    @IsNotEmpty()
+    language: string;
+
+    @ApiPropertyOptional()
+    instructor: string;
+
+    @ApiPropertyOptional()
+    image: string;
+
+    @ApiPropertyOptional()
+    videoPreviewUrl: string;
+
+    @ApiProperty()
+    @IsNotEmpty()
+    status: string;
+
+    @ApiProperty()
+    @IsNotEmpty()
+    certificate: string;
+}
 
 export class FilterCourseDto {
     category: string;

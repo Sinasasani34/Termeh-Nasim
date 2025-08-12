@@ -7,6 +7,7 @@ export enum BadRequestMessage {
     AlreadyAccepted = "این کامنت از قبل تایید شده است",
     AlreadyRejected = "این کامنت از قبل رد شده است",
     AlreadyRegisterd = "اين كاربر قبلا در دوره ثبت نام كرده است",
+    RequiredTitle = "اين كاربر قبلا در دوره ثبت نام كرده است",
 }
 
 export enum AuthMessage {

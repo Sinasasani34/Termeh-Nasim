@@ -6,9 +6,8 @@ import { TypeOrmConfig } from 'src/config/typeorm.config';
 import { UserModule } from '../user/user.module';
 import { AuthModule } from '../auth/auth.module';
 import { CategoryModule } from '../category/category.module';
-import { CourseModule } from '../course/course.module';
 import { ImageModule } from '../image/image.module';
-import { CourseCustomFieldsModule } from '../course-custom-fields/course-custom-fields.module';
+import { CourseModule } from '../course/course.module';
 
 @Module({
   imports: [
@@ -20,9 +19,8 @@ import { CourseCustomFieldsModule } from '../course-custom-fields/course-custom-
     AuthModule,
     UserModule,
     CategoryModule,
-    CourseModule,
     ImageModule,
-    CourseCustomFieldsModule
+    CourseModule
   ],
   controllers: [],
   providers: [],
