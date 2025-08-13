@@ -80,6 +80,11 @@ export class CourseService {
     return course;
   }
 
+  async checkCourseById(id: number) {
+    const course = await this.courseRepository.findOneBy({ id });
+    return course;
+  }
+
   async myCourses() {
     const { id } = this.request.user as RequestUser;
     this.courseRepository.find({
@@ -130,7 +135,7 @@ export class CourseService {
   async update(id: any, courseDto: UpdateCourseDto) {
     let { title, slug, description, categories, price, duration, level, language, instructor, image, videoPreviewUrl, status, certificate } = courseDto;
 
-    const course = await this.checkCourseBySlug(id);
+    const course = await this.checkCourseById(id);
     if (!course) {
       throw new NotFoundException('دوره مورد نظر یافت نشد')
     }
@@ -186,9 +191,13 @@ export class CourseService {
     }
   }
 
-  async remove(id: any) {
-    await this.checkCourseBySlug(id);
-    await this.courseRepository.delete({ id });
+  async remove(id: number) {
+    await this.checkCourseById(id);
+    await this.courseCategoryRepository.delete({ course: { id } });
+    const result = await this.courseRepository.delete(id);
+    if (result.affected === 0) {
+      throw new NotFoundException(`Course with ID ${id} not found`);
+    }
     return {
       message: PublicMessage.Deleted
     }
