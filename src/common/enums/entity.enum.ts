@@ -10,5 +10,5 @@ export enum EntityNames {
     CourseBookemark = "course_bookmarks",
     Image = "image",
     Follow = 'follow',
-    CourseCustomField = 'course_custom_field',
+    SmartCard = 'smart-cards',
 }
