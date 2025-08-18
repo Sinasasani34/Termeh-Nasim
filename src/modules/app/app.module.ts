@@ -8,6 +8,7 @@ import { AuthModule } from '../auth/auth.module';
 import { CategoryModule } from '../category/category.module';
 import { ImageModule } from '../image/image.module';
 import { CourseModule } from '../course/course.module';
+import { SmartCardModule } from '../smart-card/smart-card.module';
 
 @Module({
   imports: [
@@ -20,7 +21,8 @@ import { CourseModule } from '../course/course.module';
     UserModule,
     CategoryModule,
     ImageModule,
-    CourseModule
+    CourseModule,
+    SmartCardModule,
   ],
   controllers: [],
   providers: [],

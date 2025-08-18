@@ -5,7 +5,7 @@ import { UpdateSmartCardDto } from './dto/update-smart-card.dto';
 @Injectable()
 export class SmartCardService {
   create(createSmartCardDto: CreateSmartCardDto) {
-    return 'This action adds a new smartCard';
+
   }
 
   findAll() {

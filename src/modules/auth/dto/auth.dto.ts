@@ -8,9 +8,11 @@ export class AuthDto {
     @IsString()
     @Length(3, 50, { message: "اخطار!!!" })
     username: string;
+
     @ApiProperty({ enum: AuthType })
     @IsEnum(AuthType)
     type: string;
+
     @ApiProperty({ enum: AuthMethod })
     @IsEnum(AuthMethod)
     method: AuthMethod;

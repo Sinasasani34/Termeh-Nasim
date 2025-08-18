@@ -6,6 +6,7 @@ import { MaritalStatus } from "../enums/marital-status.enum";
 import { ProfessionOfExam } from "../enums/profession-of-exam";
 import { LeftHandOrNot, MilitaryStatus } from "../enums/public.enum";
 import { ProvienceEnum } from "../enums/provience.enum";
+import { PlaceOfExam } from "../enums/exam-place.enum";
 
 @Entity(EntityNames.SmartCard)
 export class SmartCard extends BaseEntity {
@@ -32,7 +33,7 @@ export class SmartCard extends BaseEntity {
     Education: string;
 
     @Column()
-    mobile: string;
+    mobile: number;
 
     @Column({ type: 'enum', enum: MaritalStatus })
     maritalStatus: string;
@@ -67,6 +68,6 @@ export class SmartCard extends BaseEntity {
     HomeTel: number;
 
     // Exam Place
-    @Column()
+    @Column({ type: 'enum', enum: PlaceOfExam })
     examPlace: string;
 }

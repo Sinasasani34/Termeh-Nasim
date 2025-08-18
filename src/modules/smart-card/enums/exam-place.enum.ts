@@ -1,0 +1,18 @@
+export enum PlaceOfExam {
+    Tehran = 'تهران (مرکز استان)',
+    Alborz = 'کرج',
+    Esfahan = 'اصفهان (مرکز استان)',
+    EsfahanTiranKron = 'اصفهان (تیران و کرون)',
+    Fars = 'فارس (شیراز)',
+    Kerman = 'کرمان (مرکز استان)',
+    Hormozghan = 'هرمزگان (بندر عباس)',
+    Hamedan = 'همدان (مرکز استان)',
+    Qom = 'قم (مرکز استان)',
+    Yazd = 'یزد (مرکز استان)',
+    KhorasanRazavi = 'خراسان رضوی (مشهد)',
+    KhorasanShomali = 'خراسان شمالی (بجنورد)',
+    Mazandaran = 'مازندران قائمشهر',
+    Markazi = 'مرکزی (ساوه)',
+    Khozestan = 'خوزستان (آبادان)',
+    Zanjan = 'زنجان (مرکز استان)',
+}
